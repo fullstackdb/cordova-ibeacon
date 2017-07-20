@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Car
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <car-loader [hidden]="currentCarId"></car-loader>
+  <car-details [carId]="'dsdsds'" [visibility]="currentCarId"></car-details>
+  <button ion-button block style="margin-top: 150px;" (click)="mockEnterInRegion()" [hidden]="currentCarId">Mock Enter in Region</button>
+  <button ion-button block (click)="mockExitFromRegion()" [hidden]="!currentCarId">Mock Exit from Region</button>
+</ion-content>

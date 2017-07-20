@@ -1,0 +1,9 @@
+<section class="slides">
+  <ng-template [ngIf]="slides">
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide.image" class="slides__slide_image"/>
+      </ion-slide>
+    </ion-slides>
+  </ng-template>
+</section>
