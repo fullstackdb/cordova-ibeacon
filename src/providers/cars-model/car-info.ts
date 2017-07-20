@@ -1,6 +1,4 @@
 export class CarInfo {
+    id: number;
     name: string;
-    maxSpeed: number;
-    year: string;
-    img: string;
 }

@@ -20,8 +20,8 @@ export const STORAGE_KEY = new InjectionToken('STORAGE_KEY');
 
 @Injectable()
 export class CarsStorageProvider {
-    private carsLoadedSource: ReplaySubject<boolean>;
-    public $carsLoaded: Observable<boolean>;
+    private carsLoadedSource: ReplaySubject<CarsRegionInfo[]>;
+    public $carsLoaded: Observable<CarsRegionInfo[]>;
 
     constructor(private nativeStorage: NativeStorage,
                 @Inject(STORAGE_KEY) private STORAGE_KEY: string,
@@ -37,20 +37,19 @@ export class CarsStorageProvider {
                     this.carsRegion.loadRegionCarsInfo().subscribe(
                         (cars: CarsRegionInfo[]) => {
                             this.nativeStorage.setItem(this.STORAGE_KEY, cars);
+                            return cars;
                         }, err => {
                             console.log('can not load cars from API.');
                         });
+                } else {
+                    return cars;
                 }
             })
-            .then(() => {
-                this.carsLoadedSource.next(true);
+            .then((cars: CarsRegionInfo[]) => {
+                this.carsLoadedSource.next(cars);
             })
             .catch((err) => {
                 console.log('can not load cars from storage ', err);
             });
-    }
-
-    public loadCars(): Observable<CarsRegionInfo[] | any> {
-        return fromPromise(this.nativeStorage.getItem(this.STORAGE_KEY));
     }
 }

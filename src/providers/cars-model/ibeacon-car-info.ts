@@ -1,7 +1,7 @@
 import { CarInfo } from './car-info';
 
 export class IBeaconCarInfo {
-    major: string;
-    minor: string;
+    major: number;
+    minor: number;
     car: CarInfo;
 }

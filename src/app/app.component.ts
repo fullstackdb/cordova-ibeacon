@@ -19,7 +19,6 @@ export class MyApp {
                 statusBar: StatusBar,
                 splashScreen: SplashScreen,
                 private ibeacon: IBeacon,
-                private carServiceProvider: CarServiceProvider,
                 private beaconService: IBeaconMonitoringServiceProvider,
                 private plt: Platform) {
         platform.ready().then(() => {

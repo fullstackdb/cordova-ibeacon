@@ -28,18 +28,19 @@ export class CarsApiRegionProvider implements ICarsApiRegionProvider {
                 uuid          : 'ba268b30-f4ac-48be-b1a8-66e49a13bc97',
                 iBeaconCarInfo: [
                     {
-                        major: '1',
-                        minor: '1',
+                        major: 1,
+                        minor: 1,
                         car  : {
-                            name: 'name: 1-1'
+                            name: 'name: 1-1',
+                            id  : 11
                         }
                     },
                     {
-                        major: '1',
-                        minor: '2',
+                        major: 1,
+                        minor: 2,
                         car  : {
-                            name: 'name: 1 -2 '
-
+                            name: 'name: 1 -2 ',
+                            id  : 12
                         }
                     }
                 ]
@@ -48,18 +49,20 @@ export class CarsApiRegionProvider implements ICarsApiRegionProvider {
                 uuid          : 'bed20c25-2456-4466-85a7-4631f1d40f85',
                 iBeaconCarInfo: [
                     {
-                        major: '2',
-                        minor: '1',
+                        major: 2,
+                        minor: 1,
                         car  : {
-                            name: 'name: 2 -1 '
+                            name: 'name: 2 -1 ',
+                            id  : 21
 
                         }
                     },
                     {
-                        major: '2',
-                        minor: '2',
+                        major: 2,
+                        minor: 2,
                         car  : {
-                            name: 'name: 2-2'
+                            name: 'name: 2-2',
+                            id  : 22
                         }
                     }
                 ]

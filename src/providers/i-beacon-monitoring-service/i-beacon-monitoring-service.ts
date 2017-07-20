@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { CarsStorageProvider } from '../cars-storage/cars-storage';
 import { Subscription } from 'rxjs/Subscription';
-import { IBeacon } from '@ionic-native/ibeacon';
+import { Beacon, IBeacon, IBeaconPluginResult } from '@ionic-native/ibeacon';
 import { CarServiceProvider } from '../car-service/car-service';
+import { IBeaconMonitorConfigurationProvider } from '../i-beacon-monitor-configuration/i-beacon-monitor-configuration';
+import { CarsRegionInfo } from '../cars-model/cars-region-info';
+import { IBeaconCarInfo } from '../cars-model/ibeacon-car-info';
 
 /*
   Generated class for the IBeaconMonitoringServiceProvider provider.
@@ -11,20 +14,32 @@ import { CarServiceProvider } from '../car-service/car-service';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular DI.
 */
+
+const getCarsRegionInfo = (cars: CarsRegionInfo[], ibeaconResult: IBeaconPluginResult): IBeaconCarInfo[] => {
+    return cars.find(r => r.uuid === ibeaconResult.region.identifier).iBeaconCarInfo;
+};
+
+const getCarInRegion = (ibeaconsCarsRegion: IBeaconCarInfo[], ibeacon: Beacon): IBeaconCarInfo => {
+    return ibeaconsCarsRegion.find(beaconCar =>
+        beaconCar.minor === ibeacon.minor
+        && beaconCar.major === ibeacon.major);
+};
+
 @Injectable()
 export class IBeaconMonitoringServiceProvider {
     private subscription: Subscription;
 
     constructor(private carsStorage: CarsStorageProvider,
                 private ibeacon: IBeacon,
-                private carServiceProvider: CarServiceProvider) {
+                private carServiceProvider: CarServiceProvider,
+                private ibeaconConfiguration: IBeaconMonitorConfigurationProvider) {
         console.log('Hello IBeaconMonitoringServiceProvider Provider');
         this.carsStorage.initCars();
     }
 
     public startMonitoring(): void {
-        this.subscription = this.carsStorage.$carsLoaded.subscribe(() => {
-
+        this.subscription = this.carsStorage.$carsLoaded.subscribe((cars: CarsRegionInfo[]) => {
+            this.monitorRegions(cars);
         });
     }
 
@@ -32,7 +47,7 @@ export class IBeaconMonitoringServiceProvider {
         this.subscription.unsubscribe();
     }
 
-    private monitorRegions(): void {
+    private monitorRegions(cars: CarsRegionInfo[]): void {
         // create a new delegate and register it with the native layer
         let delegate = this.ibeacon.Delegate();
 
@@ -46,35 +61,41 @@ export class IBeaconMonitoringServiceProvider {
                     console.error();
                 });
 
-        delegate.didStartMonitoringForRegion()
-            .subscribe(
-                data => {
-                    console.log('didStartMonitoringForRegion: ', data);
-                },
-                error => {
-                    console.error();
-                });
+        //delegate.didStartMonitoringForRegion()
+        //    .subscribe(
+        //        (data: IBeaconPluginResult) => {
+        //            console.log('didStartMonitoringForRegion: ', data);
+        //        },
+        //        error => {
+        //            console.error();
+        //        });
 
         delegate.didEnterRegion()
             .subscribe(
-                data => {
-                    this.carServiceProvider.setCurrentCar('mockCarId');
-                    console.log('didEnterRegion: ', data);
+                (beaconRes: IBeaconPluginResult) => {
+                    console.log('didEnterRegion: ', beaconRes);
+                    let beaconCars = getCarsRegionInfo(cars, beaconRes);
+
+                    if (beaconRes.beacons.length > 0) {
+                        let IBeaconCarInfo = getCarInRegion(beaconCars, beaconRes.beacons[0]);
+                        this.carServiceProvider.setCurrentCar(IBeaconCarInfo.car);
+                    }
                 });
 
         delegate.didExitRegion()
             .subscribe(
-                data => {
+                (beaconRes: IBeaconPluginResult) => {
                     this.carServiceProvider.setCurrentCar(null);
-                    console.log('didEnterRegion: ', data);
+                    console.log('didExitRegion: ', beaconRes);
                 });
 
-        let beaconRegion = this.ibeacon.BeaconRegion('testBeacon32', '2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6');
-        this.ibeacon.startMonitoringForRegion(beaconRegion)
-            .then(
-                () => console.log('Native layer recieved the request to monitoring'),
-                error => console.error('Native layer failed to begin monitoring: ', error)
-            );
-
+        let beaconsRegion = this.ibeaconConfiguration.getIBeacons(cars);
+        beaconsRegion.map((beaconRegion) => {
+            this.ibeacon.startMonitoringForRegion(beaconRegion)
+                .then(
+                    () => console.log('Native layer recieved the request to monitoring'),
+                    error => console.error('Native layer failed to begin monitoring: ', error)
+                );
+        });
     }
 }
