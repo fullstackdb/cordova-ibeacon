@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +17,7 @@ export interface ICarsApiRegionProvider {
 
 @Injectable()
 export class CarsApiRegionProvider implements ICarsApiRegionProvider {
-    constructor(private http: Http) {
+    constructor() {
 
     }
 
@@ -31,7 +30,7 @@ export class CarsApiRegionProvider implements ICarsApiRegionProvider {
                         major: 1,
                         minor: 1,
                         car  : {
-                            name: 'name: 1-1',
+                            name: 'Porshe 2-1',
                             id  : 11
                         }
                     },
@@ -46,13 +45,13 @@ export class CarsApiRegionProvider implements ICarsApiRegionProvider {
                 ]
             },
             {
-                uuid          : 'bed20c25-2456-4466-85a7-4631f1d40f85',
+                uuid          : '2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6',
                 iBeaconCarInfo: [
                     {
                         major: 2,
                         minor: 1,
                         car  : {
-                            name: 'name: 2 -1 ',
+                            name: 'Porshe',
                             id  : 21
 
                         }

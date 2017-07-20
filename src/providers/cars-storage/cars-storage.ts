@@ -1,13 +1,11 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Observable } from 'rxjs/Observable';
 import { CarsApiRegionToken } from '../cars-api-region-token';
 import { ICarsApiRegionProvider } from '../cars/cars-api-region';
 import { CarsRegionInfo } from '../cars-model/cars-region-info';
-import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 /*

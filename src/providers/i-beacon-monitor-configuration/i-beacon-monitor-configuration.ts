@@ -19,8 +19,8 @@ export class IBeaconMonitorConfigurationProvider {
     public getIBeacons(cars: CarsRegionInfo[]): BeaconRegion[] {
         if (cars.length === 0) return [];
         return cars.reduce((prev, c: CarsRegionInfo) => {
-            let regionCarsIBeacons = c.iBeaconCarInfo.reduce((prev, carInfo) => {
-                return prev.concat([new this.ibeacon.BeaconRegion(carInfo.car.name, c.uuid, carInfo.major, carInfo.minor)]);
+            let regionCarsIBeacons = c.iBeaconCarInfo.reduce((prev, carInfo): any => {
+                return prev.concat([this.ibeacon.BeaconRegion(carInfo.car.name, c.uuid, carInfo.major, carInfo.minor)]);
             }, []);
             return [prev, ...regionCarsIBeacons];
         }, []);

@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IBeacon, IBeaconPluginResult } from '@ionic-native/ibeacon';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { CarServiceProvider } from '../providers/car-service/car-service';
 import { IBeaconMonitoringServiceProvider } from '../providers/i-beacon-monitoring-service/i-beacon-monitoring-service';
 import { isValidBluetoothStatus } from '../providers/i-beacon-monitoring-service/valid-statuses';
 
@@ -19,7 +18,7 @@ export class MyApp {
                 statusBar: StatusBar,
                 splashScreen: SplashScreen,
                 private ibeacon: IBeacon,
-                private beaconService: IBeaconMonitoringServiceProvider,
+                beaconService: IBeaconMonitoringServiceProvider,
                 private plt: Platform) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.

@@ -14,11 +14,11 @@ export class CarServiceProvider {
     constructor(public http: Http) {
     }
 
-    getCarDetails(car: CarInfo): Observable<any> {
+    getCarDetails(car: CarInfo): Observable<CarInfo> {
         return Observable.of<CarInfo>(car);
     }
 
-    setCurrentCar(car: CarInfo): void {
-        this.currentCarChangedSource.next(CarInfo);
+    setCurrentCar(car: CarInfo | null): void {
+        this.currentCarChangedSource.next(car);
     }
 }
