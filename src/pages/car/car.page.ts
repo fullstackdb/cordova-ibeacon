@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CarServiceProvider } from "../../providers/car-service/car-service";
+import { IBeaconMonitoringServiceProvider } from '../../providers/i-beacon-monitoring-service/i-beacon-monitoring-service';
 
 @Component({
   selector: 'page-car',
@@ -17,7 +18,7 @@ export class CarPage implements OnInit {
     this.carServiceProvider.currentCarChanged$
         .subscribe((currentCarId: string | null) => {
           this.currentCarId = currentCarId;
-        })
+        });
   }
 
   mockEnterInRegion(): void {

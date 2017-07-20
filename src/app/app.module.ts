@@ -21,6 +21,7 @@ import { CarsApiRegionToken } from '../providers/cars-api-region-token';
 import { CarsApiRegionProvider } from '../providers/cars/cars-api-region';
 import { CarsStorageProvider, STORAGE_KEY } from '../providers/cars-storage/cars-storage';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { IBeaconMonitoringServiceProvider } from '../providers/i-beacon-monitoring-service/i-beacon-monitoring-service';
 @NgModule({
     declarations   : [
         MyApp,
@@ -56,6 +57,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
         {provide: STORAGE_KEY, useValue: 'CARS_STORAGE_KEY'},
         CarsStorageProvider,
         CarsApiRegionProvider,
+        IBeaconMonitoringServiceProvider,
         NativeStorage
     ]
 })

@@ -21,5 +21,4 @@ export class CarServiceProvider {
   setCurrentCar(carId: string | null): void {
     this.currentCarChangedSource.next(carId);
   }
-
 }

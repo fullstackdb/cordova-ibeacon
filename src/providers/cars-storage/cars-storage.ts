@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { CarsApiRegionToken } from '../cars-api-region-token';
 import { ICarsApiRegionProvider } from '../cars/cars-api-region';
 import { CarsRegionInfo } from '../cars-model/cars-region-info';
+import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 /*
   Generated class for the CarsStorageProvider provider.
@@ -18,10 +20,14 @@ export const STORAGE_KEY = new InjectionToken('STORAGE_KEY');
 
 @Injectable()
 export class CarsStorageProvider {
+    private carsLoadedSource: ReplaySubject<boolean>;
+    public $carsLoaded: Observable<boolean>;
 
     constructor(private nativeStorage: NativeStorage,
                 @Inject(STORAGE_KEY) private STORAGE_KEY: string,
                 @Inject(CarsApiRegionToken) private carsRegion: ICarsApiRegionProvider) {
+        this.carsLoadedSource = new ReplaySubject(1);
+        this.$carsLoaded = this.carsLoadedSource.asObservable();
     }
 
     public initCars(): void {
@@ -35,9 +41,13 @@ export class CarsStorageProvider {
                             console.log('can not load cars from API.');
                         });
                 }
-            }).catch((err) => {
-            console.log('can not load cars from storage ', err);
-        });
+            })
+            .then(() => {
+                this.carsLoadedSource.next(true);
+            })
+            .catch((err) => {
+                console.log('can not load cars from storage ', err);
+            });
     }
 
     public loadCars(): Observable<CarsRegionInfo[] | any> {
