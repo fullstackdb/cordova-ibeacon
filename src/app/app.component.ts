@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IBeacon } from "@ionic-native/ibeacon";
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { CarServiceProvider } from "../providers/car-service/car-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,8 @@ export class MyApp {
   constructor(platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    private ibeacon: IBeacon) {
+    private ibeacon: IBeacon,
+    private carServiceProvider: CarServiceProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -30,7 +32,9 @@ export class MyApp {
       // Subscribe to some of the delegate's event handlers
       delegate.didRangeBeaconsInRegion()
         .subscribe(
-        data => { console.log('didRangeBeaconsInRegion: ', data) },
+        data => { 
+          console.log('didRangeBeaconsInRegion: ', data) 
+        },
         error => { console.error(); });
 
       delegate.didStartMonitoringForRegion()
@@ -41,8 +45,16 @@ export class MyApp {
       delegate.didEnterRegion()
         .subscribe(
         data => {
+          this.carServiceProvider.setCurrentCar('mockCarId');
           console.log('didEnterRegion: ', data);
         });
+
+      delegate.didExitRegion()
+      .subscribe(
+      data => {
+        this.carServiceProvider.setCurrentCar(null);
+        console.log('didEnterRegion: ', data);
+      });
 
       let beaconRegion = this.ibeacon.BeaconRegion('testBeacon32', '2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6')
       this.ibeacon.startMonitoringForRegion(beaconRegion)
