@@ -1,0 +1,26 @@
+<ion-card>
+    <img src="{{ article.image }}" (click)="pushPage(article);"/>
+    <ion-card-content>
+        <ion-card-title>
+            {{ article.title }}
+        </ion-card-title>
+        <p>
+            {{ article.shortDescription }}
+        </p>
+    </ion-card-content>
+    <ion-row no-padding>
+        <ion-col>
+            <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='star'></ion-icon>
+                Favorite
+            </button>
+        </ion-col>
+        <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='share-alt'></ion-icon>
+                Share
+            </button>
+        </ion-col>
+    </ion-row>
+
+</ion-card>

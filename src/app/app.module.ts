@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -16,6 +16,10 @@ import { CarLoaderComponent } from '../components/car-loader/car-loader';
 import { CarDetailsComponent } from '../components/car-details/car-details';
 import { CarServiceProvider } from '../providers/car-service/car-service';
 import { FeatureSliderComponent } from '../components/feature-slider/feature-slider';
+import { ArticlesListItemComponent } from '../components/articles-list-item/articles-list-item';
+import { ArticlesListComponent } from '../components/articles-list/articles-list';
+import { ArticlesServiceProvider } from '../providers/articless-service/articles-service';
+import { ArticleDetailsComponent } from '../components/article-details/article-details';
 import { CarsApiRegionToken } from '../providers/cars-api-region-token';
 import { CarsApiRegionProvider } from '../providers/cars/cars-api-region';
 import { CarsStorageProvider, STORAGE_KEY } from '../providers/cars-storage/cars-storage';
@@ -35,6 +39,7 @@ import { UserWidgetComponent } from '../components/user-widget/user-widget';
 import { UserProvider } from '../providers/user/user';
 import { SsoProvider } from '../providers/sso/sso';
 import { SsoApiProvider } from '../providers/sso-api/sso-api';
+import { ArticlesApiServiceProvider } from "../providers/articless-service/articles-api.service";
 
 @NgModule({
   declarations: [
@@ -54,6 +59,9 @@ import { SsoApiProvider } from '../providers/sso-api/sso-api';
     InformationGroupScheduleComponent,
     InformationGroupAboutComponent,
     UserWidgetComponent,
+    ArticlesListItemComponent,
+    ArticlesListComponent,
+    ArticleDetailsComponent
   ],
   imports: [
     HttpModule,
@@ -66,7 +74,9 @@ import { SsoApiProvider } from '../providers/sso-api/sso-api';
     AboutPage,
     CarPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ArticlesListItemComponent,
+    ArticleDetailsComponent
   ],
   providers: [
     StatusBar,
@@ -85,7 +95,9 @@ import { SsoApiProvider } from '../providers/sso-api/sso-api';
     CarsApiRegionProvider,
     IBeaconMonitoringServiceProvider,
     NativeStorage,
-    IBeaconMonitorConfigurationProvider
+    IBeaconMonitorConfigurationProvider,
+    ArticlesServiceProvider,
+    ArticlesApiServiceProvider
   ]
 })
 export class AppModule {
