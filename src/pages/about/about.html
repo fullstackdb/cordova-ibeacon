@@ -1,25 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Information
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-slides pager>
-
-  <ion-slide style="background-color: green">
-    <h2>Slide 1</h2>
-  </ion-slide>
-
-  <ion-slide style="background-color: blue">
-    <h2>Slide 2</h2>
-  </ion-slide>
-
-  <ion-slide style="background-color: red">
-    <h2>Slide 3</h2>
-  </ion-slide>
-
-</ion-slides>
+  <user-widget></user-widget>
+  <button ion-button full>Help / Tutorial</button>
+  <ng-template [ngIf]="groupInfoList">
+    <information-group *ngFor="let group of groupInfoList"
+                       [title]="group.title">
+      <information-group-resolver [type]="group.type" 
+                                  [groupInfo]="group">
+      </information-group-resolver>
+    </information-group>
+  </ng-template>
 </ion-content>
