@@ -12,7 +12,7 @@ export class UserProvider {
   public currentUserChanged$: Observable<UserModel>;
   
   constructor() {
-    this.currentUserChangedSource = new ReplaySubject();
+    this.currentUserChangedSource = new ReplaySubject(1);
     this.currentUserChanged$ = this.currentUserChangedSource.asObservable();
     this.currentUserChangedSource.next({name: 'Mock', forename: 'User', email: 'mock@site.com'} as UserModel);
   }

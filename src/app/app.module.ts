@@ -16,6 +16,12 @@ import { CarLoaderComponent } from '../components/car-loader/car-loader';
 import { CarDetailsComponent } from '../components/car-details/car-details';
 import { CarServiceProvider } from '../providers/car-service/car-service';
 import { FeatureSliderComponent } from '../components/feature-slider/feature-slider';
+import { CarsApiRegionToken } from '../providers/cars-api-region-token';
+import { CarsApiRegionProvider } from '../providers/cars/cars-api-region';
+import { CarsStorageProvider, STORAGE_KEY } from '../providers/cars-storage/cars-storage';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { IBeaconMonitoringServiceProvider } from '../providers/i-beacon-monitoring-service/i-beacon-monitoring-service';
+import { IBeaconMonitorConfigurationProvider } from '../providers/i-beacon-monitor-configuration/i-beacon-monitor-configuration';
 import { TutorialComponent } from '../components/tutorial/tutorial';
 import { TutorialProvider } from '../providers/tutorial/tutorial';
 import { RegistrationComponent } from '../components/registration/registration';
@@ -72,7 +78,15 @@ import { SsoApiProvider } from '../providers/sso-api/sso-api';
     AboutInfoProvider,
     UserProvider,
     SsoProvider,
-    SsoApiProvider
+    SsoApiProvider,
+    {provide: CarsApiRegionToken, useClass: CarsApiRegionProvider},
+    {provide: STORAGE_KEY, useValue: 'CARS_STORAGE_KEY'},
+    CarsStorageProvider,
+    CarsApiRegionProvider,
+    IBeaconMonitoringServiceProvider,
+    NativeStorage,
+    IBeaconMonitorConfigurationProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+}

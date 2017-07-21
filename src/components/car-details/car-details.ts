@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarServiceProvider } from "../../providers/car-service/car-service";
+import { CarInfo } from '../../providers/cars-model/car-info';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class CarDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.carServiceProvider.getCarDetails(this.carId)
+    this.carServiceProvider.getCarDetails({id: 12} as CarInfo)
       .subscribe((carDetails: any) => {
         this.carDetails = carDetails;
       })

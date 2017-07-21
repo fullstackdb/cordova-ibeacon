@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
-import { Subject } from "rxjs/Subject";
-
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { CarInfo } from '../cars-model/car-info';
 
 @Injectable()
 export class CarServiceProvider {
-  currentCarChangedSource = new Subject<string | null>();  
-  currentCarChanged$ = this.currentCarChangedSource.asObservable();
+    currentCarChangedSource: ReplaySubject<CarInfo>;
+    currentCarChanged$: Observable<CarInfo>;
 
-  constructor(public http: Http) {
-  }
+    constructor() {
+        this.currentCarChangedSource = new ReplaySubject<CarInfo>(1);
+        this.currentCarChanged$ = this.currentCarChangedSource.asObservable();
+    }
 
-  getCarDetails(id: string): Observable<any> {
-    return Observable.of<any>({name: 'Try CarService'})
-  }
+    getCarDetails(car: CarInfo): Observable<CarInfo> {
+        return Observable.of<CarInfo>(car);
+    }
 
-  setCurrentCar(carId: string | null): void {
-    this.currentCarChangedSource.next(carId);
-  }
-
+    setCurrentCar(car: CarInfo | null): void {
+        this.currentCarChangedSource.next(car);
+    }
 }
