@@ -1,0 +1,30 @@
+<div class="info-group__address">
+    <div class="info-group__address_description">{{description}}</div>
+    <ng-template [ngIf]="addresses">
+        <ion-grid>
+            <div class="info-group__address_list">
+                <ng-template ngFor let-address [ngForOf]="addresses">
+                    <ion-row>
+                        <ion-col col-1>
+                            <ion-icon name="map"></ion-icon>
+                        </ion-col>
+                        <ion-col>
+                            <div class="info-group__address_title">{{address.title}}</div>
+                            <div class="info-group__address_location">{{address.location}}</div>
+                            <div class="info-group__address_phone">
+                                <span class="info-group__address_fax">Phone:</span>
+                                <a  (click)="makeCall(address.phone)">{{address.phone}}</a>
+                            </div>
+                            <ng-template [ngIf]="address.fax">
+                                <span class="info-group__address_fax">Fax:</span>
+                                <span class="info-group__address_fax">
+                                    {{address.fax}}
+                                </span>
+                            </ng-template> 
+                        </ion-col>  
+                    </ion-row>
+                </ng-template>
+            </div><!-- /.info-group__address_list -->
+        </ion-grid>
+    </ng-template>
+</div><!-- /.info-group__address -->

@@ -1,0 +1,31 @@
+<section class="user-widget">
+  <ion-list>
+    <ng-template [ngIf]="isUserLoggined()">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="contact" item-start></ion-icon>
+          </ion-avatar>
+          <h2>{{userInfo.name}} {{userInfo.forename}}</h2>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger">
+            <ion-icon name="log-out"></ion-icon>
+            Logout
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ng-template>
+    <ng-template [ngIf]="!isUserLoggined()">
+      <ion-item>
+        <ion-icon name="contact" item-start></ion-icon>
+        <button ion-button color="secondary" item-end padding>Register</button>            
+        <button ion-button color="light" item-end padding>
+          <ion-icon name="log-in"></ion-icon>
+          Login
+        </button>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+</section>
+

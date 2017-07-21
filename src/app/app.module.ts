@@ -16,7 +16,19 @@ import { CarLoaderComponent } from '../components/car-loader/car-loader';
 import { CarDetailsComponent } from '../components/car-details/car-details';
 import { CarServiceProvider } from '../providers/car-service/car-service';
 import { FeatureSliderComponent } from '../components/feature-slider/feature-slider';
-import { IntroductionComponent } from '../components/introduction/introduction';
+import { TutorialComponent } from '../components/tutorial/tutorial';
+import { TutorialProvider } from '../providers/tutorial/tutorial';
+import { RegistrationComponent } from '../components/registration/registration';
+import { InformationGroupComponent } from '../components/information-group/information-group';
+import { InformationGroupAddressComponent } from '../components/information-group-address/information-group-address';
+import { AboutInfoProvider } from '../providers/about-info/about-info';
+import { InformationGroupResolverComponent } from '../components/information-group-resolver/information-group-resolver';
+import { InformationGroupScheduleComponent } from '../components/information-group-schedule/information-group-schedule';
+import { InformationGroupAboutComponent } from '../components/information-group-about/information-group-about';
+import { UserWidgetComponent } from '../components/user-widget/user-widget';
+import { UserProvider } from '../providers/user/user';
+import { SsoProvider } from '../providers/sso/sso';
+import { SsoApiProvider } from '../providers/sso-api/sso-api';
 
 @NgModule({
   declarations: [
@@ -28,7 +40,14 @@ import { IntroductionComponent } from '../components/introduction/introduction';
     CarLoaderComponent,
     CarDetailsComponent,
     FeatureSliderComponent,
-    IntroductionComponent
+    TutorialComponent,
+    RegistrationComponent,
+    InformationGroupComponent,
+    InformationGroupAddressComponent,
+    InformationGroupResolverComponent,
+    InformationGroupScheduleComponent,
+    InformationGroupAboutComponent,
+    UserWidgetComponent,
   ],
   imports: [
     HttpModule,
@@ -48,7 +67,12 @@ import { IntroductionComponent } from '../components/introduction/introduction';
     SplashScreen,
     IBeacon,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CarServiceProvider
+    CarServiceProvider,
+    TutorialProvider,
+    AboutInfoProvider,
+    UserProvider,
+    SsoProvider,
+    SsoApiProvider
   ]
 })
 export class AppModule {}
