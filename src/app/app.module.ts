@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -17,38 +17,49 @@ import { CarDetailsComponent } from '../components/car-details/car-details';
 import { CarServiceProvider } from '../providers/car-service/car-service';
 import { FeatureSliderComponent } from '../components/feature-slider/feature-slider';
 import { IntroductionComponent } from '../components/introduction/introduction';
+import { ArticlesListItemComponent } from '../components/articles-list-item/articles-list-item';
+import { ArticlesListComponent } from '../components/articles-list/articles-list';
+import { ArticlesServiceProvider } from '../providers/articless-service/articles-service';
+import { ArticleDetailsComponent } from '../components/article-details/article-details';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    CarPage,
-    HomePage,
-    TabsPage,
-    CarLoaderComponent,
-    CarDetailsComponent,
-    FeatureSliderComponent,
-    IntroductionComponent
-  ],
-  imports: [
-    HttpModule,
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    CarPage,
-    HomePage,
-    TabsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    IBeacon,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CarServiceProvider
-  ]
+    declarations   : [
+        MyApp,
+        AboutPage,
+        CarPage,
+        HomePage,
+        TabsPage,
+        CarLoaderComponent,
+        CarDetailsComponent,
+        FeatureSliderComponent,
+        IntroductionComponent,
+        ArticlesListItemComponent,
+        ArticlesListComponent,
+        ArticleDetailsComponent
+    ],
+    imports        : [
+        HttpModule,
+        BrowserModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap      : [IonicApp],
+    entryComponents: [
+        MyApp,
+        AboutPage,
+        CarPage,
+        HomePage,
+        TabsPage,
+        ArticlesListItemComponent,
+        ArticleDetailsComponent
+    ],
+    providers      : [
+        StatusBar,
+        SplashScreen,
+        IBeacon,
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        CarServiceProvider,
+        ArticlesServiceProvider
+    ]
 })
-export class AppModule {}
+export class AppModule {
+}

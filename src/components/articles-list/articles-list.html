@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>News</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngFor="let article of articles;">
+        <articles-list-item [article]="article"></articles-list-item>
+    </div>
+</ion-content>
