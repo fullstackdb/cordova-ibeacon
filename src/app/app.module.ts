@@ -40,6 +40,10 @@ import { UserProvider } from '../providers/user/user';
 import { SsoProvider } from '../providers/sso/sso';
 import { SsoApiProvider } from '../providers/sso-api/sso-api';
 import { ArticlesApiServiceProvider } from "../providers/articless-service/articles-api.service";
+import { TutorialItemComponent } from '../components/tutorial-item/tutorial-item';
+import { TutorialBluetoothComponent } from '../components/tutorial-bluetooth/tutorial-bluetooth';
+import { TutorialWifiComponent } from '../components/tutorial-wifi/tutorial-wifi';
+import { TutorialAppComponent } from '../components/tutorial-app/tutorial-app';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { ArticlesApiServiceProvider } from "../providers/articless-service/artic
     UserWidgetComponent,
     ArticlesListItemComponent,
     ArticlesListComponent,
-    ArticleDetailsComponent
+    ArticleDetailsComponent,
+    TutorialItemComponent,
+    TutorialBluetoothComponent,
+    TutorialWifiComponent,
+    TutorialAppComponent
   ],
   imports: [
     HttpModule,
