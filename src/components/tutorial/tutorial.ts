@@ -27,4 +27,8 @@ export class TutorialComponent implements OnInit {
     this.isActive = false;
   }
 
+  public onSkip(): void {
+    this.hideTutorial();
+  }
+
 }
