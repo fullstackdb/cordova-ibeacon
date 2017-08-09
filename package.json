@@ -1,8 +1,8 @@
 {
-  "name": "POCNg",
+  "name": "@fullstackdb/ibeacon.hybrid.poc",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "fullstackdb",
+  "homepage": "http://web-ui.org/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
